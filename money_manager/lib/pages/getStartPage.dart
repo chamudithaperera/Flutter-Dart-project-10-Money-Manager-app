@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
-import 'pages/getStartPage.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class GetStartPage extends StatelessWidget {
+  const GetStartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Money Manager',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: const Color(0xFFFA812F),
@@ -19,15 +13,9 @@ class MyApp extends StatelessWidget {
           seedColor: const Color(0xFFFA812F),
           primary: const Color(0xFFFA812F),
           secondary: const Color(0xFFFFB22C),
-          background: const Color(0xFFEEEEEE),
         ),
-        scaffoldBackgroundColor: const Color(0xFFEEEEEE),
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const GetStartPage(),
-        // Add more routes here as you create more pages
-      },
+      home: Scaffold(body: Column(children: const [Text('Get Start Page')])),
     );
   }
 }
