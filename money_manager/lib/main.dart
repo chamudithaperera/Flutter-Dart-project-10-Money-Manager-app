@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'pages/getStartPage.dart';
 import 'pages/loginPage.dart';
 import 'app_colors.dart';
+import 'pages/signUpPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const GetStartPage(),
         '/login': (context) => const LoginPage(),
+        '/signup': (context) => const SignUpPage(),
       },
     );
   }

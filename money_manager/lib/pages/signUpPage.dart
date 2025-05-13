@@ -1,6 +1,60 @@
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
 
+// Reusable password field with eye icon
+class PasswordTextField extends StatefulWidget {
+  final String hintText;
+  final TextEditingController? controller;
+
+  const PasswordTextField({
+    Key? key,
+    this.hintText = 'Password',
+    this.controller,
+  }) : super(key: key);
+
+  @override
+  State<PasswordTextField> createState() => _PasswordTextFieldState();
+}
+
+class _PasswordTextFieldState extends State<PasswordTextField> {
+  bool _obscure = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: widget.controller,
+      obscureText: _obscure,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: AppColors.lightGray,
+        hintText: widget.hintText,
+        hintStyle: TextStyle(color: AppColors.darkBlue.withOpacity(0.6)),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
+        prefixIcon: Icon(
+          widget.hintText.toLowerCase().contains('confirm')
+              ? Icons.lock_outline
+              : Icons.lock,
+          color: AppColors.darkBlue,
+        ),
+        suffixIcon: IconButton(
+          icon: Icon(
+            _obscure ? Icons.visibility_off : Icons.visibility,
+            color: AppColors.darkBlue.withOpacity(0.7),
+          ),
+          onPressed: () {
+            setState(() {
+              _obscure = !_obscure;
+            });
+          },
+        ),
+      ),
+    );
+  }
+}
+
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
 
@@ -118,46 +172,13 @@ class SignUpPage extends StatelessWidget {
 
                     const SizedBox(height: 20),
 
-                    // Password TextField
-                    TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: AppColors.lightGray,
-                        hintText: 'Password',
-                        hintStyle: TextStyle(
-                          color: AppColors.darkBlue.withOpacity(0.6),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                        prefixIcon: Icon(Icons.lock, color: AppColors.darkBlue),
-                      ),
-                    ),
+                    // Password TextField with eye icon
+                    PasswordTextField(hintText: 'Password'),
 
                     const SizedBox(height: 20),
 
-                    // Confirm Password TextField
-                    TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: AppColors.lightGray,
-                        hintText: 'Confirm Password',
-                        hintStyle: TextStyle(
-                          color: AppColors.darkBlue.withOpacity(0.6),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                        prefixIcon: Icon(
-                          Icons.lock_outline,
-                          color: AppColors.darkBlue,
-                        ),
-                      ),
-                    ),
+                    // Confirm Password TextField with eye icon
+                    PasswordTextField(hintText: 'Confirm Password'),
 
                     const SizedBox(height: 40),
 
@@ -204,8 +225,7 @@ class SignUpPage extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            // TODO: Navigate to login page
-                            print('Login pressed!');
+                            Navigator.pushNamed(context, '/login');
                           },
                           child: Text(
                             'Login',

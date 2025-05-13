@@ -1,6 +1,56 @@
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
 
+// PasswordTextField widget with eye icon
+class PasswordTextField extends StatefulWidget {
+  final String hintText;
+  final TextEditingController? controller;
+
+  const PasswordTextField({
+    Key? key,
+    this.hintText = 'Password',
+    this.controller,
+  }) : super(key: key);
+
+  @override
+  State<PasswordTextField> createState() => _PasswordTextFieldState();
+}
+
+class _PasswordTextFieldState extends State<PasswordTextField> {
+  bool _obscure = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: widget.controller,
+      obscureText: _obscure,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: AppColors.lightGray,
+        hintText: widget.hintText,
+        hintStyle: TextStyle(color: AppColors.darkBlue.withOpacity(0.6)),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
+        prefixIcon: Icon(Icons.lock, color: AppColors.darkBlue),
+        suffixIcon: IconButton(
+          icon: Icon(
+            _obscure ? Icons.visibility_off : Icons.visibility,
+            color: AppColors.darkBlue.withOpacity(0.7),
+          ),
+          onPressed: () {
+            setState(() {
+              _obscure = !_obscure;
+            });
+          },
+        ),
+      ),
+    );
+  }
+}
+
+// LoginPage with modern theme and password eye icon
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
@@ -95,30 +145,14 @@ class LoginPage extends StatelessWidget {
 
                     const SizedBox(height: 20),
 
-                    // Password TextField
-                    TextField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: AppColors.lightGray,
-                        hintText: 'Password',
-                        hintStyle: TextStyle(
-                          color: AppColors.darkBlue.withOpacity(0.6),
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                        prefixIcon: Icon(Icons.lock, color: AppColors.darkBlue),
-                      ),
-                    ),
+                    // Password TextField with eye icon
+                    PasswordTextField(hintText: 'Password'),
 
                     // Forgot Password
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
                         onPressed: () {
-                          // TODO: Implement forgot password logic or navigation
                           print('Forgot Password pressed!');
                         },
                         style: TextButton.styleFrom(
@@ -195,7 +229,6 @@ class LoginPage extends StatelessWidget {
                       width: double.infinity,
                       child: OutlinedButton.icon(
                         onPressed: () {
-                          // TODO: Implement Google sign-in logic
                           print('Google Login pressed!');
                         },
                         style: OutlinedButton.styleFrom(
@@ -238,8 +271,7 @@ class LoginPage extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () {
-                            // TODO: Navigate to signup page
-                            print('Sign Up pressed!');
+                            Navigator.pushNamed(context, '/signup');
                           },
                           child: Text(
                             'Sign Up',
