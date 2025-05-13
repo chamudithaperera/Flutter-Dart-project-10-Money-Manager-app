@@ -40,7 +40,7 @@ class GetStartPage extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
               child: ElevatedButton(
                 onPressed: () {
-                  print('Get Started pressed!');
+                  Navigator.pushNamed(context, '/login');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primaryOrange, // Red background

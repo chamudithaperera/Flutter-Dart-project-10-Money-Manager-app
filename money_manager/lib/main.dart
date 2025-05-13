@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'pages/getStartPage.dart';
+import 'pages/loginPage.dart';
 import 'app_colors.dart';
 
 void main() async {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const GetStartPage(),
-        // Add more routes here as you create more pages
+        '/login': (context) => const LoginPage(),
       },
     );
   }
