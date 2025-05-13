@@ -113,7 +113,25 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
 
-                    const SizedBox(height: 40),
+                    // Forgot Password
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          // TODO: Implement forgot password logic or navigation
+                          print('Forgot Password pressed!');
+                        },
+                        style: TextButton.styleFrom(
+                          foregroundColor: AppColors.primaryOrange,
+                        ),
+                        child: const Text(
+                          'Forgot Password?',
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
 
                     // Login Button
                     SizedBox(
@@ -138,6 +156,101 @@ class LoginPage extends StatelessWidget {
                         ),
                         child: const Text('LOGIN', textAlign: TextAlign.center),
                       ),
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    // Or divider
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Divider(
+                            color: AppColors.lightGray,
+                            thickness: 1,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Text(
+                            'OR',
+                            style: TextStyle(
+                              color: AppColors.darkBlue.withOpacity(0.6),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Divider(
+                            color: AppColors.lightGray,
+                            thickness: 1,
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    // Google Login Button (Stylized)
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton.icon(
+                        onPressed: () {
+                          // TODO: Implement Google sign-in logic
+                          print('Google Login pressed!');
+                        },
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(
+                            color: AppColors.primaryOrange,
+                            width: 1.5,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          foregroundColor: AppColors.primaryOrange,
+                          textStyle: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            letterSpacing: 1,
+                          ),
+                        ),
+                        icon: Image.asset(
+                          'assets/google_logo.png', // Use your Google logo asset
+                          height: 24,
+                          width: 24,
+                        ),
+                        label: const Text('Continue with Google'),
+                      ),
+                    ),
+
+                    const SizedBox(height: 24),
+
+                    // Don't have an account? Sign Up
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Don't have an account? ",
+                          style: TextStyle(
+                            color: AppColors.darkBlue.withOpacity(0.8),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            // TODO: Navigate to signup page
+                            print('Sign Up pressed!');
+                          },
+                          child: Text(
+                            'Sign Up',
+                            style: TextStyle(
+                              color: AppColors.primaryOrange,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
