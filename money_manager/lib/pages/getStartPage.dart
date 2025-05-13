@@ -37,7 +37,7 @@ class GetStartPage extends StatelessWidget {
             const SizedBox(height: 80),
 
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+              padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
               child: ElevatedButton(
                 onPressed: () {
                   print('Get Started pressed!');
