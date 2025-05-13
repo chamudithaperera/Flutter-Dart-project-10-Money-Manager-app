@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'pages/getStartPage.dart';
+import 'app_colors.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -13,16 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Money Manager',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primaryColor: const Color(0xFFFA812F),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFFFA812F),
-          primary: const Color(0xFFFA812F),
-          secondary: const Color(0xFFFFB22C),
-          background: const Color(0xFFEEEEEE),
-        ),
-        scaffoldBackgroundColor: const Color(0xFFEEEEEE),
-      ),
+      theme: AppColors.theme,
       initialRoute: '/',
       routes: {
         '/': (context) => const GetStartPage(),
