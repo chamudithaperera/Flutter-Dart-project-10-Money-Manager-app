@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
+import '../widgets/balance_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -57,7 +58,7 @@ class HomePage extends StatelessWidget {
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: AppColors.secondaryYellow,
+                  color: AppColors.primaryOrange,
                   borderRadius: BorderRadius.circular(24),
                   boxShadow: [
                     BoxShadow(
@@ -95,111 +96,23 @@ class HomePage extends StatelessWidget {
                     Row(
                       children: [
                         // Income
-                        Expanded(
-                          child: Container(
-                            height: 70,
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.18),
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 8,
-                            ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.32),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  padding: const EdgeInsets.all(7),
-                                  child: Icon(
-                                    Icons.arrow_downward,
-                                    color: Colors.green,
-                                    size: 20,
-                                  ),
-                                ),
-                                const SizedBox(width: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Income',
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    Text(
-                                      'Rs 5000.00',
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
+                        BalanceCard(
+                          icon: Icons.arrow_downward,
+                          title: 'Income',
+                          amount: 'Rs 5000.00',
+                          iconColor: Colors.green,
+                          backgroundColor: Colors.white,
+                          textColor: Colors.white,
                         ),
                         const SizedBox(width: 14),
                         // Expense
-                        Expanded(
-                          child: Container(
-                            height: 70,
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.18),
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 8,
-                            ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.32),
-                                    shape: BoxShape.circle,
-                                  ),
-                                  padding: const EdgeInsets.all(7),
-                                  child: Icon(
-                                    Icons.arrow_upward,
-                                    color: Colors.red,
-                                    size: 20,
-                                  ),
-                                ),
-                                const SizedBox(width: 10),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      'Expense',
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    Text(
-                                      'Rs 1500.00',
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
+                        BalanceCard(
+                          icon: Icons.arrow_upward,
+                          title: 'Expense',
+                          amount: 'Rs 1500.00',
+                          iconColor: Colors.red,
+                          backgroundColor: Colors.white,
+                          textColor: Colors.white,
                         ),
                       ],
                     ),
