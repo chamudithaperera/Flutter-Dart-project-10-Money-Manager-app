@@ -4,7 +4,7 @@ import 'pages/loginPage.dart';
 import 'app_colors.dart';
 import 'pages/signUpPage.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }

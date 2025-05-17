@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
+import '../auth/auth.dart';
 
 // Reusable password field with eye icon
 class PasswordTextField extends StatefulWidget {
@@ -7,10 +8,10 @@ class PasswordTextField extends StatefulWidget {
   final TextEditingController? controller;
 
   const PasswordTextField({
-    Key? key,
+    super.key,
     this.hintText = 'Password',
     this.controller,
-  }) : super(key: key);
+  });
 
   @override
   State<PasswordTextField> createState() => _PasswordTextFieldState();
@@ -55,8 +56,21 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   }
 }
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
+
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
+  // Add text controllers
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +100,7 @@ class SignUpPage extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    // Accent bar
+                    // Accent barizx
                     Container(
                       width: 50,
                       height: 6,
@@ -128,6 +142,7 @@ class SignUpPage extends StatelessWidget {
 
                     // Name TextField
                     TextField(
+                      controller: nameController,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: AppColors.lightGray,
@@ -151,6 +166,7 @@ class SignUpPage extends StatelessWidget {
 
                     // Email TextField
                     TextField(
+                      controller: emailController,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: AppColors.lightGray,
@@ -172,13 +188,43 @@ class SignUpPage extends StatelessWidget {
 
                     const SizedBox(height: 20),
 
+                    // Phone TextField
+                    TextField(
+                      controller: phoneController,
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: AppColors.lightGray,
+                        hintText: 'Phone Number',
+                        hintStyle: TextStyle(
+                          color: AppColors.darkBlue.withOpacity(0.6),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                        prefixIcon: Icon(
+                          Icons.phone,
+                          color: AppColors.darkBlue,
+                        ),
+                      ),
+                      keyboardType: TextInputType.phone,
+                    ),
+
+                    const SizedBox(height: 20),
+
                     // Password TextField with eye icon
-                    PasswordTextField(hintText: 'Password'),
+                    PasswordTextField(
+                      hintText: 'Password',
+                      controller: passwordController,
+                    ),
 
                     const SizedBox(height: 20),
 
                     // Confirm Password TextField with eye icon
-                    PasswordTextField(hintText: 'Confirm Password'),
+                    PasswordTextField(
+                      hintText: 'Confirm Password',
+                      controller: confirmPasswordController,
+                    ),
 
                     const SizedBox(height: 40),
 
@@ -186,9 +232,7 @@ class SignUpPage extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {
-                          print('Sign Up pressed!');
-                        },
+                        onPressed: _signup,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primaryOrange,
                           foregroundColor: Colors.white,
@@ -246,5 +290,44 @@ class SignUpPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    phoneController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _signup() async {
+    // Validate passwords match
+    if (passwordController.text != confirmPasswordController.text) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Passwords do not match')));
+      return;
+    }
+
+    final success = await AuthService().createUserWithEmailAndPassword(
+      nameController.text,
+      emailController.text,
+      passwordController.text,
+      phoneController.text,
+    );
+
+    if (success) {
+      Navigator.pushReplacementNamed(context, '/login');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            'Failed to create account. Email may already be in use.',
+          ),
+        ),
+      );
+    }
   }
 }
