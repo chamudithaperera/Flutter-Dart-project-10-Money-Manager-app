@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'pages/getStartPage.dart';
+import 'pages/homePage.dart';
 import 'pages/loginPage.dart';
 import 'app_colors.dart';
 import 'pages/signUpPage.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const GetStartPage(),
         '/login': (context) => const LoginPage(),
         '/signup': (context) => const SignUpPage(),
+        '/home': (context) => const HomePage(),
       },
     );
   }
