@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
 import '../widgets/total_balance_card.dart';
+import '../widgets/transaction_item.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -60,7 +61,33 @@ class HomePage extends StatelessWidget {
                 income: 'Rs 5000.00',
                 expense: 'Rs 1500.00',
               ),
-              // Add more widgets below as needed
+              const SizedBox(height: 24),
+
+              // Recent Transactions
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Recent Transactions',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.darkBlue,
+                    ),
+                  ),
+                  IconButton(icon: Icon(Icons.filter_list), onPressed: () {}),
+                ],
+              ),
+              const SizedBox(height: 16),
+
+              // Recent Transactions List
+              TransactionItem(
+                icon: Icons.fastfood,
+                title: 'Food & Drink',
+                time: '2.00 Pm',
+                amount: '-\R\s 350.00',
+                isExpense: true,
+              ),
             ],
           ),
         ),

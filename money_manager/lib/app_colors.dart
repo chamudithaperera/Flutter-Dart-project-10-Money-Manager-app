@@ -9,6 +9,7 @@ class AppColors {
 
   // Background Colors
   static const Color lightGray = Color(0xFFEFEEEA);
+  static const Color darkGray = Color(0xFFFDFBEE);
   static const Color veryLightGray = Color(0xFFEEEEEE);
 
   // Theme Data
