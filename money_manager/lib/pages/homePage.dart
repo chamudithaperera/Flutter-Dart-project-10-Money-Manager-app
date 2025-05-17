@@ -11,6 +11,13 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.veryLightGray,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // TODO: Implement add transaction functionality
+        },
+        backgroundColor: AppColors.primaryOrange,
+        child: const Icon(Icons.add, color: Colors.white, size: 32),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18.0),
