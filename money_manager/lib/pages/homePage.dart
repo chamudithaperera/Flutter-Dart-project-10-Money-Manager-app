@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../app_colors.dart';
 import '../widgets/total_balance_card.dart';
 import '../widgets/transaction_item.dart';
+import '../data/dummy_transactions.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -81,12 +82,20 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 16),
 
               // Recent Transactions List
-              TransactionItem(
-                icon: Icons.fastfood,
-                title: 'Food & Drink',
-                time: '2.00 Pm',
-                amount: '-\R\s 350.00',
-                isExpense: true,
+              Expanded(
+                child: ListView.builder(
+                  itemCount: dummyTransactions.length,
+                  itemBuilder: (context, index) {
+                    final transaction = dummyTransactions[index];
+                    return TransactionItem(
+                      icon: transaction.icon,
+                      title: transaction.title,
+                      time: transaction.time,
+                      amount: transaction.amount,
+                      isExpense: transaction.isExpense,
+                    );
+                  },
+                ),
               ),
             ],
           ),
