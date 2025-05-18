@@ -24,19 +24,17 @@ class TransactionItem extends StatelessWidget {
   });
 
   void _showDetailPopup(BuildContext context) {
-    showModalBottomSheet(
+    showDialog(
       context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
       builder:
-          (_) => TransactionDetailPopup(
+          (context) => TransactionDetailPopup(
             icon: icon,
             title: title,
             time: time,
+            date: '${date.day}/${date.month}/${date.year}',
             amount: amount,
             isExpense: isExpense,
             comment: comment,
-            date: date,
           ),
     );
   }
