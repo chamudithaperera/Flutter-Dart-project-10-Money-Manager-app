@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/transaction.dart';
+import '../widgets/transaction_item.dart';
 
 final List<Transaction> dummyTransactions = [
   Transaction(
