@@ -7,6 +7,8 @@ class TransactionDetailPopup extends StatelessWidget {
   final String time;
   final String amount;
   final bool isExpense;
+  final String comment;
+  final DateTime date;
 
   const TransactionDetailPopup({
     super.key,
@@ -15,6 +17,8 @@ class TransactionDetailPopup extends StatelessWidget {
     required this.time,
     required this.amount,
     required this.isExpense,
+    required this.comment,
+    required this.date,
   });
 
   @override
@@ -51,9 +55,9 @@ class TransactionDetailPopup extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-          // Time
+          // Date and Time
           Text(
-            time,
+            '${date.day}/${date.month}/${date.year} at $time',
             style: TextStyle(
               fontSize: 16,
               color: AppColors.darkBlue.withOpacity(0.6),
@@ -67,6 +71,37 @@ class TransactionDetailPopup extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 28,
               color: isExpense ? Colors.red : Colors.green,
+            ),
+          ),
+          const SizedBox(height: 24),
+          // Comment
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: AppColors.veryLightGray,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Comment',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: AppColors.darkBlue,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  comment,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: AppColors.darkBlue.withOpacity(0.8),
+                  ),
+                ),
+              ],
             ),
           ),
           const SizedBox(height: 24),

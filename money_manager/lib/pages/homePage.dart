@@ -3,18 +3,26 @@ import '../app_colors.dart';
 import '../widgets/total_balance_card.dart';
 import '../widgets/transaction_item.dart';
 import '../data/dummy_transactions.dart';
+import '../widgets/add_transaction_popup.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+
+  void _showAddTransactionPopup(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => const AddTransactionPopup(),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.veryLightGray,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // TODO: Implement add transaction functionality
-        },
+        onPressed: () => _showAddTransactionPopup(context),
         backgroundColor: AppColors.primaryOrange,
         child: const Icon(Icons.add, color: Colors.white, size: 32),
       ),
@@ -30,7 +38,7 @@ class HomePage extends StatelessWidget {
                   CircleAvatar(
                     radius: 18,
                     backgroundColor: AppColors.lightGray,
-                    backgroundImage: AssetImage('assets/profile.png'),
+                    backgroundImage: const AssetImage('assets/profile.png'),
                   ),
                   const SizedBox(width: 12),
                   Column(
@@ -44,7 +52,7 @@ class HomePage extends StatelessWidget {
                           color: AppColors.darkBlue.withOpacity(0.6),
                         ),
                       ),
-                      Text(
+                      const Text(
                         'Your Name',
                         style: TextStyle(
                           fontSize: 17,
@@ -56,7 +64,7 @@ class HomePage extends StatelessWidget {
                   ),
                   const Spacer(),
                   IconButton(
-                    icon: Icon(Icons.menu, color: AppColors.darkBlue),
+                    icon: const Icon(Icons.menu, color: AppColors.darkBlue),
                     onPressed: () {},
                   ),
                 ],
@@ -64,7 +72,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 32),
 
               // Total Balance Card
-              TotalBalanceCard(
+              const TotalBalanceCard(
                 totalBalance: 'Rs 3500.00',
                 income: 'Rs 5000.00',
                 expense: 'Rs 1500.00',
@@ -75,7 +83,7 @@ class HomePage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     'Recent Transactions',
                     style: TextStyle(
                       fontSize: 16,
@@ -83,7 +91,10 @@ class HomePage extends StatelessWidget {
                       color: AppColors.darkBlue,
                     ),
                   ),
-                  IconButton(icon: Icon(Icons.filter_list), onPressed: () {}),
+                  IconButton(
+                    icon: const Icon(Icons.filter_list),
+                    onPressed: () {},
+                  ),
                 ],
               ),
               const SizedBox(height: 16),
@@ -100,6 +111,8 @@ class HomePage extends StatelessWidget {
                       time: transaction.time,
                       amount: transaction.amount,
                       isExpense: transaction.isExpense,
+                      comment: transaction.comment,
+                      date: transaction.date,
                     );
                   },
                 ),

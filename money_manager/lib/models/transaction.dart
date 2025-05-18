@@ -6,6 +6,8 @@ class Transaction {
   final String time;
   final String amount;
   final bool isExpense;
+  final String comment;
+  final DateTime date;
 
   const Transaction({
     required this.icon,
@@ -13,5 +15,7 @@ class Transaction {
     required this.time,
     required this.amount,
     required this.isExpense,
+    required this.comment,
+    required this.date,
   });
 }

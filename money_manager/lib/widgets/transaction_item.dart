@@ -9,6 +9,8 @@ class TransactionItem extends StatelessWidget {
   final String time;
   final String amount;
   final bool isExpense;
+  final String comment;
+  final DateTime date;
 
   const TransactionItem({
     super.key,
@@ -16,7 +18,9 @@ class TransactionItem extends StatelessWidget {
     required this.title,
     required this.time,
     required this.amount,
-    this.isExpense = true,
+    required this.isExpense,
+    required this.comment,
+    required this.date,
   });
 
   void _showDetailPopup(BuildContext context) {
@@ -31,6 +35,8 @@ class TransactionItem extends StatelessWidget {
             time: time,
             amount: amount,
             isExpense: isExpense,
+            comment: comment,
+            date: date,
           ),
     );
   }
@@ -86,7 +92,7 @@ class TransactionItem extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    time,
+                    '${date.day}/${date.month}/${date.year} - $time',
                     style: TextStyle(
                       fontSize: 14,
                       color: AppColors.darkBlue.withOpacity(0.5),
