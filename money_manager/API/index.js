@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const connectDB = require('./config/db');
 const userRouter = require('./routes/userRouter');
 
 const app = express();
@@ -7,7 +7,7 @@ const port = 8500;
 
 app.use(express.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/MoneyManager');
+connectDB();
 
 app.get('/', (req, res) => {
   res.status(200).send('HELLO EXPRESS !');

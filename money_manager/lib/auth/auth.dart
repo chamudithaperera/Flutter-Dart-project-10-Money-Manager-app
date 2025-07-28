@@ -1,8 +1,9 @@
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  static const String _usersKey = 'users';
+  static const String _baseUrl = 'http://localhost:8500/api/users';
   static const String _currentUserKey = 'currentUser';
 
   Future<bool> createUserWithEmailAndPassword(
@@ -12,27 +13,19 @@ class AuthService {
     String phone,
   ) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final usersJson = prefs.getString(_usersKey);
-      final users = usersJson != null ? json.decode(usersJson) as List : [];
-
-      // Check if user already exists
-      if (users.any((user) => user['email'] == email)) {
-        return false;
+      final response = await http.post(
+        Uri.parse('$_baseUrl/register'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'username': username,
+          'email': email,
+          'password': password,
+        }),
+      );
+      if (response.statusCode == 201) {
+        return true;
       }
-
-      // Create new user
-      final newUser = {
-        'username': username,
-        'email': email,
-        'password': password, // In a real app, you should hash the password
-        'phone': phone,
-        'createdAt': DateTime.now().toIso8601String(),
-      };
-
-      users.add(newUser);
-      await prefs.setString(_usersKey, json.encode(users));
-      return true;
+      return false;
     } catch (e) {
       print("Account creation failed: $e");
       return false;
@@ -44,19 +37,14 @@ class AuthService {
     String password,
   ) async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final usersJson = prefs.getString(_usersKey);
-
-      if (usersJson == null) return null;
-
-      final users = json.decode(usersJson) as List;
-      final user = users.firstWhere(
-        (user) => user['email'] == email && user['password'] == password,
-        orElse: () => null,
+      final response = await http.post(
+        Uri.parse('$_baseUrl/login'),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({'email': email, 'password': password}),
       );
-
-      if (user != null) {
-        // Store current user
+      if (response.statusCode == 200) {
+        final user = json.decode(response.body)['user'];
+        final prefs = await SharedPreferences.getInstance();
         await prefs.setString(_currentUserKey, json.encode(user));
         return user;
       }
