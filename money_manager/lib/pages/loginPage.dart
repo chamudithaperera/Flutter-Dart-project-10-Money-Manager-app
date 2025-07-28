@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
+import '../auth/auth.dart';
 
 // PasswordTextField widget with eye icon
 class PasswordTextField extends StatefulWidget {
@@ -51,8 +52,44 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
 }
 
 // LoginPage with modern theme and password eye icon
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false;
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _login() async {
+    setState(() {
+      _isLoading = true;
+    });
+    final user = await AuthService().logWithEmailAndPassword(
+      _emailController.text.trim(),
+      _passwordController.text.trim(),
+    );
+    setState(() {
+      _isLoading = false;
+    });
+    if (user != null) {
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Invalid email or password.')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,6 +161,7 @@ class LoginPage extends StatelessWidget {
 
                     // Email TextField
                     TextField(
+                      controller: _emailController,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: AppColors.lightGray,
@@ -146,7 +184,10 @@ class LoginPage extends StatelessWidget {
                     const SizedBox(height: 20),
 
                     // Password TextField with eye icon
-                    PasswordTextField(hintText: 'Password'),
+                    PasswordTextField(
+                      hintText: 'Password',
+                      controller: _passwordController,
+                    ),
 
                     // Forgot Password
                     Align(
@@ -171,9 +212,7 @@ class LoginPage extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/home');
-                        },
+                        onPressed: _isLoading ? null : _login,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primaryOrange,
                           foregroundColor: Colors.white,
@@ -188,7 +227,20 @@ class LoginPage extends StatelessWidget {
                           ),
                           elevation: 2,
                         ),
-                        child: const Text('LOGIN', textAlign: TextAlign.center),
+                        child:
+                            _isLoading
+                                ? const SizedBox(
+                                  width: 24,
+                                  height: 24,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                    strokeWidth: 2,
+                                  ),
+                                )
+                                : const Text(
+                                  'LOGIN',
+                                  textAlign: TextAlign.center,
+                                ),
                       ),
                     ),
 

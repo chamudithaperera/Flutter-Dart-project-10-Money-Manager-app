@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import '../app_colors.dart';
+import '../auth/auth.dart';
 
 class AddTransactionPopup extends StatefulWidget {
   const AddTransactionPopup({super.key});
@@ -47,6 +50,42 @@ class _AddTransactionPopupState extends State<AddTransactionPopup> {
       setState(() {
         _selectedDate = picked;
       });
+    }
+  }
+
+  Future<void> _addTransaction() async {
+    final user = await AuthService().getCurrentUser();
+    if (user == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('User not logged in.')));
+      return;
+    }
+    final iconName =
+        _categories
+            .firstWhere((cat) => cat['name'] == _selectedCategory)['icon']
+            .toString();
+    final transactionData = {
+      'user': user['email'],
+      'icon': iconName,
+      'title': _selectedCategory,
+      'time': TimeOfDay.now().format(context),
+      'amount': double.tryParse(_amountController.text) ?? 0.0,
+      'isExpense': _isExpense,
+      'comment': _commentController.text,
+      'date': _selectedDate.toIso8601String(),
+    };
+    final response = await http.post(
+      Uri.parse('http://localhost:8500/api/transactions'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode(transactionData),
+    );
+    if (response.statusCode == 201) {
+      Navigator.pop(context);
+    } else {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Failed to add transaction.')));
     }
   }
 
@@ -319,8 +358,7 @@ class _AddTransactionPopupState extends State<AddTransactionPopup> {
                           onPressed: () {
                             if (_formKey.currentState!.validate() &&
                                 _selectedCategory != null) {
-                              // TODO: Implement add transaction logic
-                              Navigator.pop(context);
+                              _addTransaction();
                             }
                           },
                           style: ElevatedButton.styleFrom(
