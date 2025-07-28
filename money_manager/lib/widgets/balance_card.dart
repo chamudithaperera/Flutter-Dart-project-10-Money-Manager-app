@@ -20,49 +20,47 @@ class BalanceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        height: 70,
-        decoration: BoxDecoration(
-          color: backgroundColor.withOpacity(0.18),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-        child: Row(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                color: backgroundColor.withOpacity(0.32),
-                shape: BoxShape.circle,
+    return Container(
+      height: 70,
+      decoration: BoxDecoration(
+        color: backgroundColor.withOpacity(0.18),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      child: Row(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: backgroundColor.withOpacity(0.32),
+              shape: BoxShape.circle,
+            ),
+            padding: const EdgeInsets.all(7),
+            child: Icon(icon, color: iconColor, size: 20),
+          ),
+          const SizedBox(width: 10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                title,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500,
+                  color: textColor,
+                ),
               ),
-              padding: const EdgeInsets.all(7),
-              child: Icon(icon, color: iconColor, size: 20),
-            ),
-            const SizedBox(width: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500,
-                    color: textColor,
-                  ),
+              Text(
+                amount,
+                style: TextStyle(
+                  fontSize: 13, // slightly smaller to help prevent overflow
+                  fontWeight: FontWeight.bold,
+                  color: textColor,
                 ),
-                Text(
-                  amount,
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: textColor,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

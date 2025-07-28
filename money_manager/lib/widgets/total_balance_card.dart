@@ -54,23 +54,27 @@ class TotalBalanceCard extends StatelessWidget {
           Row(
             children: [
               // Income
-              BalanceCard(
-                icon: Icons.arrow_downward,
-                title: 'Income',
-                amount: income,
-                iconColor: Colors.green,
-                backgroundColor: Colors.white,
-                textColor: Colors.white,
+              Expanded(
+                child: BalanceCard(
+                  icon: Icons.arrow_downward,
+                  title: 'Income',
+                  amount: income,
+                  iconColor: Colors.green,
+                  backgroundColor: Colors.white,
+                  textColor: Colors.white,
+                ),
               ),
               const SizedBox(width: 14),
               // Expense
-              BalanceCard(
-                icon: Icons.arrow_upward,
-                title: 'Expense',
-                amount: expense,
-                iconColor: Colors.red,
-                backgroundColor: Colors.white,
-                textColor: Colors.white,
+              Expanded(
+                child: BalanceCard(
+                  icon: Icons.arrow_upward,
+                  title: 'Expense',
+                  amount: expense,
+                  iconColor: Colors.red,
+                  backgroundColor: Colors.white,
+                  textColor: Colors.white,
+                ),
               ),
             ],
           ),
