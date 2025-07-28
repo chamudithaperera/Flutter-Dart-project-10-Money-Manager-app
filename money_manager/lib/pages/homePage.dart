@@ -17,10 +17,19 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<dynamic> _transactions = [];
   bool _isLoading = true;
+  String? _username;
 
   @override
   void initState() {
     super.initState();
+    _loadUserAndTransactions();
+  }
+
+  Future<void> _loadUserAndTransactions() async {
+    final user = await AuthService().getCurrentUser();
+    setState(() {
+      _username = user?['username'] ?? '';
+    });
     _fetchTransactions();
   }
 
@@ -113,9 +122,9 @@ class _HomePageState extends State<HomePage> {
                           color: AppColors.darkBlue.withOpacity(0.6),
                         ),
                       ),
-                      const Text(
-                        'Your Name',
-                        style: TextStyle(
+                      Text(
+                        _username ?? '',
+                        style: const TextStyle(
                           fontSize: 17,
                           fontWeight: FontWeight.bold,
                           color: AppColors.darkBlue,
