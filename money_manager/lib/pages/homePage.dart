@@ -65,6 +65,21 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // Calculate totals
+    double totalIncome = 0;
+    double totalExpense = 0;
+    for (final t in _transactions) {
+      final amount =
+          (t['amount'] is num)
+              ? t['amount'].toDouble()
+              : double.tryParse(t['amount'].toString()) ?? 0.0;
+      if (t['isExpense'] == true) {
+        totalExpense += amount;
+      } else {
+        totalIncome += amount;
+      }
+    }
+    double totalBalance = totalIncome - totalExpense;
     return Scaffold(
       backgroundColor: AppColors.veryLightGray,
       floatingActionButton: FloatingActionButton(
@@ -118,10 +133,10 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 32),
 
               // Total Balance Card
-              const TotalBalanceCard(
-                totalBalance: 'Rs 3500.00',
-                income: 'Rs 5000.00',
-                expense: 'Rs 1500.00',
+              TotalBalanceCard(
+                totalBalance: 'Rs ${totalBalance.toStringAsFixed(2)}',
+                income: 'Rs ${totalIncome.toStringAsFixed(2)}',
+                expense: 'Rs ${totalExpense.toStringAsFixed(2)}',
               ),
               const SizedBox(height: 24),
 
