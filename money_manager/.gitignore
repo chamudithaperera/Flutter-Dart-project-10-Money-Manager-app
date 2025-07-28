@@ -1,4 +1,6 @@
+# ---------------------------------
 # Miscellaneous
+# ---------------------------------
 *.class
 *.log
 *.pyc
@@ -12,26 +14,33 @@
 .swiftpm/
 migrate_working_dir/
 
+# ---------------------------------
 # IntelliJ related
+# ---------------------------------
 *.iml
 *.ipr
 *.iws
 .idea/
 
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
+# ---------------------------------
+# VS Code
+# ---------------------------------
+# Uncomment if you don't want to track VS Code settings
 #.vscode/
 
+# ---------------------------------
 # Flutter/Dart/Pub related
+# ---------------------------------
 **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
+.packages
 .pub-cache/
 .pub/
 /build/
+generated_plugin_registrant.dart
 
 # Symbolication related
 app.*.symbols
@@ -39,7 +48,58 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
-# Android Studio will place build artifacts here
+# Android Studio build folders
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# ---------------------------------
+# Node.js
+# ---------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+.pnpm-debug.log
+.cache/
+dist/
+.env
+.env.*.local
+.nyc_output/
+coverage/
+.next/
+out/
+.svelte-kit/
+vite.config.js
+vite.config.ts
+
+# Optional: if using Firebase or functions
+functions/node_modules/
+functions/lib/
+functions/.firebase/
+firebase-debug.log
+
+# ---------------------------------
+# macOS specific
+# ---------------------------------
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# ---------------------------------
+# Logs
+# ---------------------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ---------------------------------
+# Others (Optional)
+# ---------------------------------
+*.orig
+*.rej
