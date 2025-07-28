@@ -26,23 +26,22 @@ Welcome to the Money Manager App! This app is designed to empower you to take co
 - Express.js
 - MongoDB (Mongoose)
 
-
 ## Screenshots
 
 ### Get Started Page
-<img src="assets/screenshots/get_start_page.png" width="300" alt="Get Started Page">
+<img src="https://github.com/chamudithaperera/Flutter-Dart-project-10-Money-Manager-app/raw/main/money_manager/assets/screenshots/get_start_page.png" width="300" alt="Get Started Page">
 
 ### Login Page
-<img src="assets/screenshots/login_page.png" width="300" alt="Login Page">
+<img src="https://github.com/chamudithaperera/Flutter-Dart-project-10-Money-Manager-app/raw/main/money_manager/assets/screenshots/login_page.png" width="300" alt="Login Page">
 
 ### Sign Up Page
-<img src="assets/screenshots/signup_page.png" width="300" alt="Sign Up Page">
+<img src="https://github.com/chamudithaperera/Flutter-Dart-project-10-Money-Manager-app/raw/main/money_manager/assets/screenshots/signup_page.png" width="300" alt="Sign Up Page">
 
 ### Home Page
-<img src="assets/screenshots/home_page.png" width="300" alt="Home Page">
+<img src="https://github.com/chamudithaperera/Flutter-Dart-project-10-Money-Manager-app/raw/main/money_manager/assets/screenshots/home_page.png" width="300" alt="Home Page">
 
 ### Add Transaction Page
-<img src="assets/screenshots/add_transaction.png" width="300" alt="Add Transaction Page">
+<img src="https://github.com/chamudithaperera/Flutter-Dart-project-10-Money-Manager-app/raw/main/money_manager/assets/screenshots/add_transaction.png" width="300" alt="Add Transaction Page">
 
 ## Getting Started
 
